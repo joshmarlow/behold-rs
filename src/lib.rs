@@ -4,6 +4,7 @@ extern crate lazy_static;
 use std::collections::BTreeMap;
 use std::sync::{Arc, Mutex};
 
+/// The core data structure - stores shared global context and instance specific configuration
 #[derive(Clone)]
 pub struct Behold {
     /// Context to determine when to speak up
@@ -15,6 +16,7 @@ pub struct Behold {
 }
 
 impl Behold {
+    /// Create a new Behold instance
     pub fn new() -> Self {
         BEHOLD.clone()
     }
@@ -74,6 +76,12 @@ impl Behold {
     }
 
     /// Print the provided string if this behold instance is configured to speak up
+    /// Examples:
+    /// ```
+    /// behold().show_str("Hello world!");
+    /// ```
+    /// Will produce the output:
+    /// "Hello world!"
     pub fn show(&self, msg: String) {
         if self.speak_up {
             if let Some(ref tag) = self.tag {
@@ -84,17 +92,25 @@ impl Behold {
         }
     }
 
+    /// Behave just like ```show``` but accepts a ```&str```
     pub fn show_str(&self, msg: &str) {
         self.show(msg.to_string())
     }
 }
 
+/// Convenience function for quickly constructing a behold instance
+/// Examples:
+/// ```
+/// behold().show_str("Hello world!");
+/// ```
+/// Will produce the output:
+/// "Hello world!"
 pub fn behold() -> Behold {
     Behold::new()
 }
 
 lazy_static! {
-    pub static ref BEHOLD: Behold = {
+    static ref BEHOLD: Behold = {
     	Behold {
 	    	context: Arc::new(Mutex::new(BTreeMap::new())),
 	    	speak_up: true,
