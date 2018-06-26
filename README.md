@@ -19,10 +19,10 @@ However, a Behold instance can be created and configured to determine how or wha
 Contextual Debugging
 ====================
 
-`BEHOLD.show("testing")` will print "testing" to the screen.
-`BEHOLD.when(true).show("testing")` will print "testing" to the screen.
-`BEHOLD.when(false).show("testing")` will do nothing.
-`BEHOLD.when_context("key").show("testing")` will print "testing" to the screen but only if the "testing" key has been set to `true` previously.
+`BEHOLD.show("testing".to_string())` will print "testing" to the screen.
+`BEHOLD.when(true).show("testing".to_string())` will print "testing" to the screen.
+`BEHOLD.when(false).show("testing".to_string())` will do nothing.
+`BEHOLD.when_context("key".to_string()).show("testing".to_string())` will print "testing" to the screen but only if the "testing" key has been set to `true` previously.
 
 
 ```rust
@@ -41,7 +41,7 @@ fn f2(idx: usize) {
 
 fn f3(idx: usize) {
     // Do something hard to debug
-    behold().when_context(&format!("f3-{}", idx)).show(format!("Hello from f3({})!", idx));
+    behold().when_context(format!("f3-{}", idx)).show(format!("Hello from f3({})!", idx));
 }
 
 fn main() {

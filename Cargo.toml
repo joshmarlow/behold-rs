@@ -7,6 +7,7 @@ license = "MIT"
 readme = "README.md"
 description = "A simple library enabling contextual debugging"
 homepage = "https://github.com/joshmarlow/behold-rs"
+documentation = "https://docs.rs/behold/"
 repository = "https://github.com/joshmarlow/behold-rs"
 keywords = ["debugging", "debug", "behold", "contextual"]
 categories = ["development-tools::debugging"]
