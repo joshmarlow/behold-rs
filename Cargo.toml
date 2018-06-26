@@ -1,0 +1,17 @@
+[package]
+name = "behold"
+build = "build.rs"
+version = "0.1.0"
+authors = ["Josh Marlow <joshmarlow@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+description = "A simple library enabling contextual debugging"
+
+[dependencies]
+lazy_static = "1.0"
+
+[build-dependencies]
+skeptic = "0.13.3"
+
+[dev-dependencies]
+skeptic = "0.13.3"
