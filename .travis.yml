@@ -28,6 +28,3 @@ addons:
 notifications:
   email:
     on_success: never
-env:
-  global:
-  - secure: 882945b63d2285ec6681447103c1fc9a811d90f8

@@ -31,28 +31,28 @@ extern crate behold;
 use behold::behold;
 
 fn f(idx: usize) {
-	behold().show(format!("Hello from f({})!", idx));
+    behold().show(format!("Hello from f({})!", idx));
 }
 
 fn f2(idx: usize) {
-	// Do something hard to debug
-	behold().when(idx % 2 == 0).show(format!("Hello from f2({})!", idx));
+    // Do something hard to debug
+    behold().when(idx % 2 == 0).show(format!("Hello from f2({})!", idx));
 }
 
 fn f3(idx: usize) {
-	// Do something hard to debug
-	behold().when_context(&format!("f3-{}", idx)).show(format!("Hello from f3({})!", idx));
+    // Do something hard to debug
+    behold().when_context(&format!("f3-{}", idx)).show(format!("Hello from f3({})!", idx));
 }
 
 fn main() {
-	for i in 0..3 {
-		println!("\n");
-		f(i);
-		f2(i);
-		f3(i);
-		// Context is global
-		behold().set_context("f3-1".to_string(), true);
-	}
+    for i in 0..3 {
+        println!("\n");
+        f(i);
+        f2(i);
+        f3(i);
+        // Context is global
+        behold().set_context("f3-1".to_string(), true);
+    }
 }
 ```
 
@@ -82,7 +82,7 @@ extern crate behold;
 use behold::behold;
 
 fn main() {
-	behold().tag("yolo".to_string()).show("Hello world!".to_string());
+    behold().tag("yolo".to_string()).show("Hello world!".to_string());
 }
 ```
 
