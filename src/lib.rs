@@ -173,6 +173,28 @@ impl Behold {
     pub fn show_str(&self, msg: &str) {
         self.show(msg.to_string())
     }
+
+    /// Call the provided function if this behold instance is configured to speak up
+    /// # Examples
+    /// ```
+    /// use behold::behold;
+    /// behold().call(&|| { println!("Hello world!"); } );
+    /// ```
+    /// Will output:
+    /// ```ignore
+    /// "Hello world!"
+    /// ```
+    /// Whereas the following:
+    ///```
+    /// use behold::behold;
+    /// behold().when(false).call(&|| { println!("Hello world!"); } );
+    /// ```
+    /// Will output nothing.
+    pub fn call(&self, f: &Fn()) {
+        if self.speak_up {
+            f()
+        }
+    }
 }
 
 /// Convenience function for quickly constructing a behold instance.

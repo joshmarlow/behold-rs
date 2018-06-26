@@ -95,3 +95,38 @@ Produces the output:
 ```
 Hello world!, yolo
 ```
+
+Contextual Execution
+====================
+
+Sometimes it's useful to perform some debugging task (such as saving state to a file) when some context is true.
+
+```rust
+extern crate behold;
+
+use behold::behold;
+
+fn main() {
+    behold().call(&|| { println!("Hello world!"); } );
+}
+```
+
+Will output:
+
+```
+"Hello world!"
+```
+
+Whereas the following:
+
+```rust
+extern crate behold;
+
+use behold::behold;
+
+fn main() {
+    behold().when(false).call(&|| { println!("Hello world!"); } );
+}
+```
+
+Will output nothing.
