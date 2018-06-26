@@ -8,7 +8,7 @@ readme = "README.md"
 description = "A simple library enabling contextual debugging"
 homepage = "https://github.com/joshmarlow/behold-rs"
 repository = "https://github.com/joshmarlow/behold-rs"
-keywords = ["debugging", "debug", "behold", "contextual debugging"]
+keywords = ["debugging", "debug", "behold", "contextual"]
 categories = ["development-tools::debugging"]
 
 [badges]
