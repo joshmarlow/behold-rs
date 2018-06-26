@@ -5,8 +5,12 @@ Behold
 
 A simple library to aide in contextual debugging.  This is a partial Rust port of the [Python Behold library](https://github.com/robdmc/behold).
 
-Core Concept
-============
+Documentation
+=============
+API documentation is available [here](https://docs.rs/behold/).
+
+Core Concepts
+=============
 
 Sometimes print debugging is the best way to examine the state of a running program.
 But frequently you only care about the prints in a particular code path.
