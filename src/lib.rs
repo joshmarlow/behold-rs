@@ -27,23 +27,23 @@ impl Behold {
     /// # Examples
     /// ```
     /// use behold::behold;
-    /// behold().when_context("do-it".to_string()).show("Hello world!".to_string())
+    /// behold().when_context("do-it").show("Hello world!".to_string())
     /// ```
     /// Will output nothing.
     /// ```
     /// use behold::behold;
-    /// behold().set_context("do-it".to_string(), true);
-    /// behold().when_context("do-it".to_string()).show("Hello world!".to_string())
+    /// behold().set_context("do-it", true);
+    /// behold().when_context("do-it").show("Hello world!".to_string())
     /// ```
     /// Will produce the output:
     /// ```ignore
     /// "Hello world!"
     /// ```
-    pub fn set_context(&self, key: String, value: bool) {
+    pub fn set_context(&self, key: &str, value: bool) {
         let context = (*self.context).lock();
 
         if let Ok(mut context) = context {
-            (*context).insert(key, value);
+            (*context).insert(key.to_string(), value);
         } else if let Err(err) = context {
             panic!(
                 "when_context called on an instance of Behold - mutex already acquired - {:?}!",
@@ -56,32 +56,18 @@ impl Behold {
     /// # Examples
     /// ```
     /// use behold::behold;
-    /// behold().tag("apples".to_string()).show("Hello world!".to_string());
+    /// behold().tag("apples").show("Hello world!".to_string());
     /// ```
     /// Will produce the output:
     /// ```ignore
     /// "Hello world!, apples"
     /// ```
-    pub fn tag(&self, tag: String) -> Self {
+    pub fn tag(&self, tag: &str) -> Self {
         Behold {
             context: self.context.clone(),
             speak_up: self.speak_up,
-            tag: Some(tag),
+            tag: Some(tag.to_string()),
         }
-    }
-
-    /// Behave just like ```tag``` but accepts a ```&str```
-    /// # Examples
-    /// ```
-    /// use behold::behold;
-    /// behold().tag_str(&"apples").show("Hello world!".to_string());
-    /// ```
-    /// Will produce the output:
-    /// ```ignore
-    /// "Hello world!, apples"
-    /// ```
-    pub fn tag_str(&self, tag: &str) -> Self {
-        self.tag(tag.to_string())
     }
 
     /// Produce a behold instance which can speak up or not, depending on the parameter
@@ -111,21 +97,21 @@ impl Behold {
     /// # Examples
     /// ```
     /// use behold::behold;
-    /// behold().when_context("do-it".to_string()).show("Hello world!".to_string())
+    /// behold().when_context("do-it").show("Hello world!".to_string())
     /// ```
     /// Will output nothing.
     /// ```
     /// use behold::behold;
-    /// behold().set_context("do-it".to_string(), true);
-    /// behold().when_context("do-it".to_string()).show("Hello world!".to_string())
+    /// behold().set_context("do-it", true);
+    /// behold().when_context("do-it").show("Hello world!".to_string())
     /// ```
     /// Will output
     /// ```ignore
     /// "Hello world!"
     /// ```
-    pub fn when_context(&self, key: String) -> Self {
+    pub fn when_context(&self, key: &str) -> Self {
         let speak_up = match (*self.context).lock() {
-            Ok(context) => (*context).get(&key).cloned().unwrap_or_default(),
+            Ok(context) => (*context).get(&key.to_string()).cloned().unwrap_or_default(),
             Err(err) => {
                 panic!(
                     "when_context called on an instance of Behold - mutex already acquired - {:?}!",
@@ -160,20 +146,6 @@ impl Behold {
         }
     }
 
-    /// Behave just like ```show``` but accepts a ```&str```
-    /// # Examples
-    /// ```
-    /// use behold::behold;
-    /// behold().show_str(&"Hello world!");
-    /// ```
-    /// Will produce the output:
-    /// ```ignore
-    /// "Hello world!"
-    /// ```
-    pub fn show_str(&self, msg: &str) {
-        self.show(msg.to_string())
-    }
-
     /// Call the provided function if this behold instance is configured to speak up
     /// # Examples
     /// ```
@@ -203,7 +175,7 @@ impl Behold {
 ///
 /// ```rust
 /// use behold::behold;
-/// behold().show_str("Hello world!");
+/// behold().show("Hello world!".to_string());
 /// ```
 /// Will produce the output:
 /// ```ignore
