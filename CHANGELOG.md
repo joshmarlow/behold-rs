@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.0.2
+## 1.0.3
 
 Several functions that accepted `String`s were updated to instead accept `&str` as that seems more ergonomic.
 Specifically:
