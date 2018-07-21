@@ -9,6 +9,8 @@ Documentation
 =============
 API documentation is available [here](https://docs.rs/behold/).
 
+Changelog is available [here](CHANGELOG.md).
+
 Core Concepts
 =============
 
@@ -26,7 +28,7 @@ Contextual Debugging
 `BEHOLD.show("testing".to_string())` will print "testing" to the screen.
 `BEHOLD.when(true).show("testing".to_string())` will print "testing" to the screen.
 `BEHOLD.when(false).show("testing".to_string())` will do nothing.
-`BEHOLD.when_context("key".to_string()).show("testing".to_string())` will print "testing" to the screen but only if the "testing" key has been set to `true` previously.
+`BEHOLD.when_context("key").show("testing".to_string())` will print "testing" to the screen but only if the "testing" key has been set to `true` previously.
 
 
 ```rust
@@ -45,7 +47,7 @@ fn f2(idx: usize) {
 
 fn f3(idx: usize) {
     // Do something hard to debug
-    behold().when_context(format!("f3-{}", idx)).show(format!("Hello from f3({})!", idx));
+    behold().when_context(format!("f3-{}", idx).as_str()).show(format!("Hello from f3({})!", idx));
 }
 
 fn main() {
@@ -55,7 +57,7 @@ fn main() {
         f2(i);
         f3(i);
         // Context is global
-        behold().set_context("f3-1".to_string(), true);
+        behold().set_context("f3-1", true);
     }
 }
 ```
@@ -86,7 +88,7 @@ extern crate behold;
 use behold::behold;
 
 fn main() {
-    behold().tag("yolo".to_string()).show("Hello world!".to_string());
+    behold().tag("yolo").show("Hello world!".to_string());
 }
 ```
 
