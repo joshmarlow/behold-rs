@@ -9,7 +9,7 @@ Documentation
 =============
 API documentation is available [here](https://docs.rs/behold/).
 
-Changelog is available [here](Changelog.md).
+Changelog is available [here](CHANGELOG.md).
 
 Core Concepts
 =============
